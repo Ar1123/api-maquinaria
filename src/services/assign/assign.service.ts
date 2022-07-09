@@ -14,6 +14,8 @@ export class AssignService {
     ) { }
     //Crear asiganacion
     async create(assignDtro: AsignDto,) {
+        console.log(assignDtro);
+        
         const asign = new this.assignModel({
             assignDtro
         });

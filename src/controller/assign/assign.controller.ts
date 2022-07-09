@@ -5,7 +5,7 @@ import { AsignDto } from 'src/common/dto/assign.dto';
 import { AssignService } from '../../services/assign/assign.service';
 @ApiTags("assign employee ")
 
-@Controller('assign')
+@Controller('api/v1/assign-dev')
 export class AssignController {
 
     constructor (private assignservice: AssignService){}
