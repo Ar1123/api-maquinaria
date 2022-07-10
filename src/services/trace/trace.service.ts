@@ -11,41 +11,75 @@ import { IMachine } from 'src/common/interface/machine.interface';
 export class TraceService {
 
     constructor(
-        
-        @InjectModel(TRACE.name) private readonly traceModel:Model<ITrace> ,
-        @InjectModel(MACHINE.name) private readonly machineModel:Model<IMachine> 
-        
-        ){}
 
-     //Crea el trace de la maquina   
-    async create(traceDto:TraceDTO, id:string){
+        @InjectModel(TRACE.name) private readonly traceModel: Model<ITrace>,
+        @InjectModel(MACHINE.name) private readonly machineModel: Model<IMachine>
+
+    ) { }
+
+    //Crea el trace de la maquina   
+    async create(traceDto: TraceDTO, id: string) {
         //Consulta la maquina
-    const getMachine = await this.machineModel.findById(id);
-    //Destructuring del response
-           let  {nameProyect,idMachine,_id} = getMachine;
-    const newTrace = new this.traceModel({
-        ...traceDto,
-        nameProyect,
-        idMachine,
-        idM:_id,
-    });    
-    return await newTrace.save();
+        try {
+        const getMachine = await this.machineModel.findById(id);
+        
+        //Destructuring del response
+        let { nameProyect, idMachine, _id } = getMachine;
+        const newTrace = new this.traceModel({
+            ...traceDto,
+            nameProyect,
+            idMachine,
+            idM: _id,
+        });
+        return await newTrace.save();
+     } catch (error) {
+        return {
+            msg:"false",
+            body:{
+                msg:"Esta maquina no esta registrada"
+            }
+        }
+     }
     }
 
- 
- 
+
+
     //Obtiene todas los trace
-    async findAll(){
-        return this.traceModel.find();
+    async findAll() {
+        let response = await this.traceModel.find();
+
+        return {
+            msg: "ok",
+            body: response,
+        }
     }
     //Busqueda por el id del trace
-    async findOne(id:string){
-        return this.traceModel.findById(id);
+    async findOne(id: string) {
+        try {
+
+            let response = await this.traceModel.findById(id);
+            console.log("rrrr", response);
+
+            return {
+                msg: "ok",
+                body: response,
+            }
+        } catch (error) {
+            return {
+                msg: "ok",
+                body: {}
+            }
+        }
     }
 
     //Busqueda por el id de la maquina, retorna el o sus traces
-    async findByMachine(id:string){
-        return this.traceModel.find({idM:id});
+    async findByMachine(id: string) {
+
+        let response = await this.traceModel.find({ idM: id });
+        return {
+            msg: "ok",
+            body: response,
+        }
     }
 
 }

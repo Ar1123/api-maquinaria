@@ -13,18 +13,18 @@ import { AssignSchema } from '../common/schema/assign.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeatureAsync([
+    MongooseModule.forFeature([
       {
         name: MACHINE.name,
-        useFactory: () => { return MachineSchema; },
+        schema: MachineSchema,
       },
       {
         name: TRACE.name,
-        useFactory: () => { return TraceSchema; },
+        schema: TraceSchema,
       },
       {
         name: ASSIGN.name,
-        useFactory: () => { return AssignSchema; },
+        schema:AssignSchema,
       },
     ],),
   ],

@@ -10,32 +10,32 @@ export class AssignController {
 
     constructor (private assignservice: AssignService){}
 
-@Post()
-create(
-    @Body() body:AsignDto
-){
-    return this.assignservice.create(body);
-}
-@Get()
-findAll(){
-    return this.assignservice.findAll();
-}
+// @Post()
+// create(
+//     @Body() body:AsignDto
+// ){
+//     return this.assignservice.create(body);
+// }
+// @Get()
+// findAll(){
+//     return this.assignservice.findAll();
+// }
 
-@Get('by-assigen/:id')
-findOne(
-    @Param('id') id:string,
-){
+// @Get('by-assigen/:id')
+// findOne(
+//     @Param('id') id:string,
+// ){
     
 
-    return this.assignservice.findOne(id);
-}
-@Get("by-assigen/person")
-findByMachine(
-    @Query('id') id:string
-){
-    console.log("UUUUUUUUUUUU");
+//     return this.assignservice.findOne(id);
+// }
+// @Get("by-assigen/person")
+// findByMachine(
+//     @Query('id') id:string
+// ){
+//     console.log("UUUUUUUUUUUU");
     
-    return this.assignservice.findByPerson(id);
-}
+//     return this.assignservice.findByPerson(id);
+// }
 
 }

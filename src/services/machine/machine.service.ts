@@ -15,13 +15,20 @@ export class MachineService {
         return await newMachine.save();
     }
 
-   async findAll():Promise<IMachine[]>{
-        return await this.model.find();
+   async findAll(){
+        return {
+            msg:"ok",
+            body:await this.model.find()
+        };
    }
 
-   async findOne(id:string):Promise<IMachine>{
+   async findOne(id:string){
     console.log(id);
+        let response =  await this.model.findById(id);
     
-    return await this.model.findById(id);
+    return {
+        msg:"ok",
+        body:response??{},
+    }
    }
 }
